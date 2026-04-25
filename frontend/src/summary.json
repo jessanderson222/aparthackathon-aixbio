@@ -1,0 +1,33 @@
+{
+  "summary": {
+    "historical_analogs":
+    {
+      "id": "nipah_kerala_2018",
+      "relevance_score": 0.94,
+      "match_reason": "exact_pathogen",
+      "formatted": "## Nipah Virus — Kerala, India (2018)\n**Cases:** 19 | **Deaths:** 17 | **CFR:** 89%\n**Transmission:** Bat-to-human, limited human-to-human (nosocomial)\n**Key facts:** ...\n**Response:** ...\n**Lessons:** ...\n**Sources:** [WHO DON](...), [CDC](...)"
+    },
+  "policy_context":
+    {
+      "id": "who_r_and_d_blueprint",
+      "relevance_score": 0.81,
+      "formatted": "## WHO R&D Blueprint Priority Pathogens\n..."
+    },
+  "live_signals": [
+    {
+      "source": "cdc_travel_notices",
+      "date": "2026-04-22",
+      "title": "...",
+      "link": "..."
+    }
+  ],
+  "retrieval_metadata": {
+    "query_received": {
+        "title": "Title here",
+        "text": "text here"
+    },
+    "total_corpus_entries_searched": 45,
+    "tier_breakdown": {"exact": 1, "family": 2, "embedding": 2}
+  }
+  }
+}
