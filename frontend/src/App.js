@@ -37,6 +37,10 @@ const App = () => {
 
 	const fileData = () => {
     if (returnedSummary) {
+      // TODO: this is where we will return all the info that we want a user to see.
+      // I followed the data structure from the comments in Slack but can update.
+      // Rendering will folow this pattern though where we have an HTML element for each
+      // specific JSON element.
       return (
         <h1>{returnedSummary?.policy_context?.id}</h1>
       )
