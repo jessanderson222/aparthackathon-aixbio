@@ -13,6 +13,10 @@ const App = () => {
   // update to accomodate what comes back from the api
   const [returnedSummary, setReturnedSummary] = useState('');
 
+  //TODO: When the API is ready, use a useEffect to make the API call when the value of selectedFile updates.
+  // then, use that file to send to the API.
+
+
   // update this once we have the API in place
 	const onFileUpload = (setReturnedSummary) => {
 		const formData = new FormData();
@@ -30,33 +34,32 @@ const App = () => {
     setReturnedSummary(summary);
     console.log(returnedSummary)
 	};
+
 	const fileData = () => {
-
-if (returnedSummary) {
-  return (
-    <h1>{returnedSummary?.policy_context?.id}</h1>
-  )
-} else if (selectedFile) {
-			return (
-				<div>
-					<h2>File Details:</h2>
-					<p>File Name: {selectedFile.name}</p>
-					<p>File Type: {selectedFile.type}</p>
-					<p>
-						Last Modified: {selectedFile.lastModifiedDate.toDateString()}
-					</p>
-
-				</div>
-			);
-		} else {
-			return (
-				<div>
-					<br />
-					<h4>An incident report could include a ProMED alert, WHO Disease Outbreak News item, news article, or field note.</h4>
+    if (returnedSummary) {
+      return (
+        <h1>{returnedSummary?.policy_context?.id}</h1>
+      )
+    } else if (selectedFile) {
+      return (
+        <div>
+          <h2>File Details:</h2>
+          <p>File Name: {selectedFile.name}</p>
+          <p>File Type: {selectedFile.type}</p>
+          <p>
+            Last Modified: {selectedFile.lastModifiedDate.toDateString()}
+          </p>
+        </div>
+        );
+    } else {
+      return (
+        <div>
+          <br />
+          <h4>An incident report could include a ProMED alert, WHO Disease Outbreak News item, news article, or field note.</h4>
           <h4>File must be a PDF.</h4>
-				</div>
-			);
-		}
+        </div>
+      );
+    }
 	};
 
 	return (
