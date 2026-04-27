@@ -1,7 +1,7 @@
 import json
 import os
 from dotenv import load_dotenv
-from openai import AzureOpenAI
+from openai import OpenAI
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,25 +21,14 @@ app.add_middleware(
 # load environment
 load_dotenv()
 
-# get Azure OpenAI configuration
-api_key            = os.getenv("AZURE_OPENAI_KEY")
-azure_endpoint     = os.getenv("AZURE_OPENAI_ENDPOINT")
-azure_deployment   = os.getenv("AZURE_OPENAI_DEPLOYMENT")
-azure_api_version  = os.getenv("AZURE_OPENAI_API_VERSION", "2024-10-21")
+# get AI API key
+api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:
-    raise ValueError("AZURE_OPENAI_KEY not found. Check your .env file.")
-if not azure_endpoint:
-    raise ValueError("AZURE_OPENAI_ENDPOINT not found. Check your .env file.")
-if not azure_deployment:
-    raise ValueError("AZURE_OPENAI_DEPLOYMENT not found. Check your .env file.")
+    raise ValueError("API key not found. Check your .env file.")
 
 # set up AI client
-client = AzureOpenAI(
-    api_key        = api_key,
-    azure_endpoint = azure_endpoint,
-    api_version    = azure_api_version,
-)
+client = OpenAI(api_key=api_key)
 
 """Class to enforce structure of output to UI"""
 class BioWatchBrief(BaseModel):
@@ -144,7 +133,7 @@ def build_rag_request(client, report: str) -> dict:
     """
 
     response = client.responses.create(
-        model=azure_deployment,
+        model="gpt-4.1-mini",
         input=prompt,
         max_output_tokens=2000
     )
@@ -264,7 +253,7 @@ def format_result(entry: dict, score: int) -> dict:
     Returns a dictionary of retrieved context."""
 def retrieve_context(rag_request: dict) -> dict:
 
-    #get relevent entries in corpus
+    #get relevant entries in corpus
     scored_outbreaks = []
     scored_policy = []
 
@@ -387,7 +376,7 @@ def analyze_report(client, report: str, rag_request: dict, retrieved_context:dic
     """
 
     result = client.responses.create(
-        model=azure_deployment,
+        model="gpt-4.1-mini",
         max_output_tokens=2000,
         input=analysis_prompt
     )

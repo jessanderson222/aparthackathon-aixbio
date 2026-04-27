@@ -15,7 +15,7 @@ python -m pip install fastapi uvicorn openai python-dotenv pydantic
 - Create .env file:
 OPENAI_API_KEY=your_api_key_here
 
-- Ensure corpus.json is in same directory as main.py
+- Ensure biowatch_corpus_fixed.json is in same directory as main.py
 
 - Run backend:
 python -m uvicorn main:app --reload
